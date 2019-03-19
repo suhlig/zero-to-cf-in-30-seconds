@@ -59,7 +59,7 @@ You are ...
 
 # How does it work?
 
-`<img/>`
+![](pipeline-sketch.jpg)
 
 # Score Card
 
