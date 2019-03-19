@@ -1,0 +1,21 @@
+<style type="text/css">
+  .reveal .mini { font-size: 50%; }
+  .reveal .url { text-transform: lowercase; }
+
+  .reveal section img {
+    background: none;
+    border: none;
+    box-shadow: none;
+  }
+
+  .reveal iframe {
+    width: 100%;
+    width: -moz-available;
+    width: -webkit-fill-available;
+    width: fill-available;
+    height: 100%;
+    height: -moz-available;
+    height: -webkit-fill-available;
+    height: fill-available;
+  }
+</style>

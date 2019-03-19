@@ -1,4 +1,5 @@
-# Zero to CF in Kube-Cluster in 30 Seconds with Concourse, Helm, Fissile and Eirini
+# [Zero to CF in Kube-Cluster in 30 Seconds with Concourse, Helm, Fissile and Eirini](https://cfna19.sched.com/event/LVYz/zero-to-cf-in-kube-cluster-in-30-seconds-with-concourse-helm-fissile-and-eirini-steffen-uhlig-ibm-akshay-mankar-pivotal)
+
 Steffen Uhlig, IBM & Akshay Mankar, Pivotal
 
 Track: Cloud Foundry for Business
@@ -58,8 +59,10 @@ Movie: In a terminal, someone types
     You can use
         kubectl get pods --namespace scf
   ```      
+- in the video, show pods getting created just like the general Eirini demo
 - all config under version control
 - did not provide any custom values beyond `foobar`
+- save myvalues as state in git
 
 ## Why did _we_ do this?
 
@@ -76,6 +79,17 @@ Movie: In a terminal, someone types
 
 ## How to do it?
 
+# Scenarios
+
+## I broke the env
+
+Before: debug, dig up the docs on how to re-create, trouble
+Now: press the recreate button in Concours
+
+## New SCF release
+
+Before: ...
+Now: ...
 
 # Sections
 
