@@ -84,7 +84,7 @@ Movie: In a terminal, someone types
 ## I broke the env
 
 Before: debug, dig up the docs on how to re-create, trouble
-Now: press the recreate button in Concours
+Now: press the recreate button in Concourse
 
 ## New SCF release
 
