@@ -25,21 +25,25 @@ Sorry 🤠
 
 You are ...
 
-* Test-driving CF (different versions maybe?)
-* Building on top of CF (e.g. a tool)
-* Developing a CF component
+* test-driving CF (different versions maybe?)
+* building on top of CF (e.g. a tool)
+* developing a CF component
 
 # Big Idea
 
-`minikube : kube = this : CF`
+`minikube : kube :: this : CF`
+
+# Demo
+
+`<video/>`
 
 # Why?
 
 # Dev speed
 
-- quickly spin up a dev environment
-- fast onboarding of new team members
-- less fear
+- Quickly spin up a dev environment
+- Fast onboarding of new team members
+- Less fear<br/>
   => broke it? N.P.!
 
 # It's lightweight
@@ -55,12 +59,8 @@ You are ...
 # Repeatable
 
 * Yields repeatable dev environments
-* Ship the description, not the cluster
+* Ship the config, not the cluster
   - Vagrant philosophy
-
-# Demo
-
-`<video/>`
 
 # How does it work?
 
@@ -75,10 +75,6 @@ You are ...
 
 # Details
 
-# `set-pipeline`
-
-* the only manual step
-* takes the name of "the world"
 
 # Creates k8s cluster
 
@@ -92,26 +88,29 @@ You are ...
 
 ![](welcome-to-scf.png)
 
+# `set-pipeline`
+
+* the only manual step
+* takes the name of "the world"
+
 # How to ...
 
-# Help, I broke my dev env
+# Help!
 
-Before:
+## I broke my dev env
 
-* Debug
-* Troubleshoot
-* Give up
-* Find the docs how to re-create
+<div id="left">
+* Before:
+  - Debug
+  - Troubleshoot
+  - Give up
+  - Find the docs how to re-create
+</div>
 
-Now:
-
-* Press the recreate button in Concourse
-
-# New SCF release
-
-Before: ...
-
-Now: ...
+<div id="right">
+* Now:
+  - Press the recreate button in Concourse
+</div>
 
 # Ideas
 
@@ -121,11 +120,12 @@ Now: ...
 
 # Score Card
 
-Did we achieve our goals?
+Did we achieve our goals? ...
 
-1.
-1.
-1.
+1. Getting a new env is very straighforward: ✅
+1. Repeatability: ✅
+1. Speed == 30s: ❌
+1. Speed <= 30mins: ✅
 
 # Thanks!
 
