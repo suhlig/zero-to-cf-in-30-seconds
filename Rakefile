@@ -1,6 +1,8 @@
 require 'rake/clean'
 require 'pathname'
 
+SOURCE_DIR = 'src'.freeze
+
 TARGET_DIR = Pathname('public_html')
 directory TARGET_DIR
 TARGET_FILE = TARGET_DIR / 'index.html'
@@ -20,9 +22,6 @@ CLEAN.include FileList[
 
 CLOBBER.include TARGET_DIR
 
-SOURCE_DIR = 'src'.freeze
-SOURCE_FILES = GPP_FILES.pathmap("#{SOURCE_DIR}/%f")
-
 REVEAL_JS_VERSION = '3.7.0'.freeze
 REVEAL_JS_VERSIONED_NAME = "reveal.js-#{REVEAL_JS_VERSION}".freeze
 REVEAL_JS_DIR = TARGET_DIR / REVEAL_JS_VERSIONED_NAME
@@ -34,16 +33,18 @@ directory REVEAL_JS_DIR => TARGET_DIR do |task|
   sh "curl --location #{REVEAL_JS_DOWNLOAD_URL} | tar xz -C #{TARGET_DIR}"
 end
 
-desc "Assets are in #{TARGET_DIR}"
-task :assets do
-  FileList['assets/*'].each do |source|
-    target = File.join(TARGET_DIR, File.basename(source))
-    cp_r source, target
+ASSET_SOURCES = FileList['assets/*']
+ASSETS = ASSET_SOURCES.pathmap("#{TARGET_DIR}/%f")
+
+ASSETS.zip(ASSET_SOURCES).each do |target, source|
+  desc "Copy #{source} to #{target}"
+  file target => source do
+    cp source, target
   end
 end
 
 desc "Source are pre-processed into #{TARGET_DIR}"
-file "#{GPP_DIR}/index.markdown" => ["#{SOURCE_DIR}/index.markdown", GPP_DIR, DIRTY_FILE] + FileList["#{SOURCE_DIR}/**/*.markdown"] do |target|
+file "#{GPP_DIR}/index.markdown" => [GPP_DIR, DIRTY_FILE] + FileList["#{SOURCE_DIR}/**/*.markdown"] do |target|
   sh %(gpp -I src -x -o #{target} #{SOURCE_DIR}/index.markdown)
 end
 
@@ -59,7 +60,7 @@ file DIRTY_FILE do |target_file|
 end
 
 desc "Build #{TARGET_FILE}"
-file TARGET_FILE => [ TARGET_DIR, REVEAL_JS_DIR, GPP_FILES, :assets, DIRTY_FILE ] do
+file TARGET_FILE => [ TARGET_DIR, REVEAL_JS_DIR, GPP_FILES, DIRTY_FILE ] + ASSETS do
   sh %(pandoc
       --to=revealjs
       --standalone
