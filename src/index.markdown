@@ -94,7 +94,21 @@ You are ...
 
 # It's a pipeline!
 
-![](pipeline-sketch.jpg)
+
+![](graph1.svg)
+<!-- ![](pipeline-sketch.jpg) -->
+
+# Deploy CF
+
+![](graph2.svg)
+
+# Test thy cluster
+
+![](graph3.svg)
+
+# No need to see the YAML
+
+![](graph4.svg)
 
 # Details
 
