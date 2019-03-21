@@ -5,7 +5,7 @@
 
 - Akshay Mankar
   * Pivotal
-  * `#eirini`, previously `#cfcr`
+  * `#eirini`, `#haskell`, previously `#cfcr`
 
 - Steffen Uhlig
   * IBM
