@@ -69,6 +69,10 @@ You are ...
 * Helm
 * Concourse
 
+# Secret Sauce
+
+![](eirini-arch.png)
+
 # It's a pipeline!
 
 ![](pipeline-sketch.jpg)
