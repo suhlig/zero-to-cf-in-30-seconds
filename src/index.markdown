@@ -3,13 +3,13 @@
 
 # Who we are
 
-- Akshay Mankar
-  * Pivotal
-  * `#eirini`, `#haskell`, previously `#cfcr`
+* Akshay Mankar
+   - Pivotal
+   - `#eirini`, `#haskell`, previously `#cfcr`
 
-- Steffen Uhlig
-  * IBM
-  * `#eirini`, `#ruby`, previously `#bits-service`
+* Steffen Uhlig
+   - IBM
+   - `#eirini`, `#ruby`, previously `#bits-service`
 
 # 30 Seconds to CF?
 
@@ -35,7 +35,26 @@ You are ...
 
 # Demo
 
-`<video/>`
+<video class="stretch" src="https://github.com/suhlig/zero-to-cf-in-30-seconds/releases/download/v1.0.0-beta.1/zero2cfin30s.mp4" controls />
+
+<aside class="notes">
+* Create the world
+  ```command
+  ./set-pipeline zero2cfin30s eirini ~/workspace/eirini/private-config
+  ```
+* In browser, show pipeline: https://ci.flintstone.cf.cloud.ibm.com/teams/eirini/pipelines/zero2cfin30s
+* Trigger delete job:
+  ```command
+  fly -t eirini trigger-job --job zero2cfin30s/delete-cluster --watch
+  ```
+* In terminal, show CF containers coming up in `scf` namespace:
+  ```command
+  ibmcloud ks cluster-get zero2cfin30s
+  eval $(ibmcloud ks cluster-config --cluster zero2cfin30s --export)
+  watch kubectl get pods -n scf
+  ```
+* TODO Maybe show app containers coming up in `opi` namespace (classic HerrJulz demo)
+</aside>
 
 # Why?
 
