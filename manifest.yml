@@ -1,0 +1,7 @@
+---
+applications:
+- name: zero2cfin30s
+  buildpack: staticfile_buildpack
+  memory: 64M
+  path: src
+  buildpack: https://github.com/cloudfoundry/staticfile-buildpack
