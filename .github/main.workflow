@@ -4,7 +4,7 @@ workflow "cf push on git push" {
 }
 
 action "push to CF" {
-  uses = ".github/actions/cf-push"
+  uses = "./.github/actions/cf-push"
   env = {
     API_ENDPOINT = "https://api.eu-gb.bluemix.net"
     CF_USER = "apikey"
