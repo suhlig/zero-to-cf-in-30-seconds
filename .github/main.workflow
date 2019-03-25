@@ -4,13 +4,20 @@ workflow "cf push on git push" {
 }
 
 action "push to CF" {
-  uses = "./.github/actions/cf-push"
+#  uses = "./.github/actions/cf-push"
+  uses = "suhlig/webservices-ci"
+  needs = "generate-presentation"
   env = {
     API_ENDPOINT = "https://api.eu-gb.bluemix.net"
     CF_USER = "apikey"
     CF_ORG = "Steffen.Uhlig@de.ibm.com"
-    CF_SPACE = "presentations"
+    CF_SPACE = "dev"
     EXTRA_ARGS = ""
   }
   secrets = ["CF_PASSWORD"]
+}
+
+action "generate-presentation" {
+  uses = "suhlig/webservices-ci"
+  runs = ["rake"]
 }

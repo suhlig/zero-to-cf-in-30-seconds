@@ -6,7 +6,7 @@ LABEL "com.github.actions.description"="Push the code to Cloud Foundry"
 LABEL "com.github.actions.icon"="cloud"
 LABEL "com.github.actions.color"="blue"
 
-LABEL "repository"="https://github.com/suhlig/gh-action-cf-push"
+# LABEL "repository"="https://github.com/suhlig/gh-action-cf-push"
 
 RUN	apk add --no-cache \
 	ca-certificates \
