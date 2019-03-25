@@ -1,7 +1,10 @@
 ---
 applications:
 - name: zero2cfin30s
-  buildpack: staticfile_buildpack
+  buildpacks:
+    - https://github.com/cloudfoundry/staticfile-buildpack
   memory: 64M
-  path: src
-  buildpack: https://github.com/cloudfoundry/staticfile-buildpack
+  path: public_html
+  routes:
+    - route: zero2cfin30s.eu-gb.mybluemix.net
+    - route: zero2cfin30s.eirini.cf # cf create-domain Steffen.Uhlig@de.ibm.com eirini.cf
