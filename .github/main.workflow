@@ -5,7 +5,7 @@ workflow "cf push on git push" {
 
 action "push to CF" {
 #  uses = "./.github/actions/cf-push"
-  uses = "suhlig/webservices-ci"
+  uses = "docker://suhlig/webservices-ci"
   needs = "generate-presentation"
   env = {
     API_ENDPOINT = "https://api.eu-gb.bluemix.net"
@@ -18,6 +18,6 @@ action "push to CF" {
 }
 
 action "generate-presentation" {
-  uses = "suhlig/webservices-ci"
+  uses = "docker://suhlig/webservices-ci"
   runs = ["rake"]
 }
