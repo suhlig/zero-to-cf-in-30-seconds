@@ -4,7 +4,7 @@ workflow "cf push on git push" {
 }
 
 action "push to CF" {
-  uses = "./.github/actions/cf-push"
+  uses = "suhlig/gh-action-cf-push@master"
   needs = "generate-presentation"
   env = {
     API_ENDPOINT = "https://api.eu-gb.bluemix.net"

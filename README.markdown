@@ -74,28 +74,6 @@ Movie: In a terminal, someone types
 * quick onboarding of new team members
 * change stuff once, apply "everywhere"
 
-## Where do we end?
-
-
-## How to do it?
-
-# Scenarios
-
-## I broke the env
-
-Before: debug, dig up the docs on how to re-create, trouble
-Now: press the recreate button in Concourse
-
-## New SCF release
-
-Before: ...
-Now: ...
-
-# Sections
-
-1.
-1.
-1.
-1.
-
-# Key Take-Away Points
+# TODO
+* master gets cf-pushed to a staging space
+* releases gets cf-pushed to the production space
