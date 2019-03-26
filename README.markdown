@@ -5,7 +5,7 @@ Steffen Uhlig, IBM & Akshay Mankar, Pivotal
 Track: Cloud Foundry for Business
 Experience Level: Beginner
 
-Thursday, April 4 • 3:20pm - 3:50pm
+Thursday, April 4 • 3:40pm - 4:10pm
 
 # Abstract
 
