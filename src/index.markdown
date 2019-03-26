@@ -155,6 +155,11 @@ You are ...
 * Print details at the end of set-pipeline?
 * Your ideas?
 
+# Similar Projects
+
+* [1-click BOSH lite pipeline](https://github.com/petergtz/1-click-bosh-lite-pipeline)
+* [bosh-bootloader](https://github.com/cloudfoundry/bosh-bootloader)
+
 # Score Card
 
 Did we achieve our goals? ...
@@ -169,6 +174,8 @@ Did we achieve our goals? ...
 `@AkshayMankar`
 
 `@suhlig`
+
+`http://zero2cfin30s.eirini.cf`
 
 <div class="mini">
   Rev.
