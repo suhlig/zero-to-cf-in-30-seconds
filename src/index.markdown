@@ -1,15 +1,15 @@
-% Zero to CF in Kube-Cluster in 30 Seconds
+% Zero to CF in <br/>30 Seconds
 % Akshay Mankar, Steffen Uhlig
 
 # Who we are
 
-* Akshay Mankar
-   - Pivotal
-   - `#eirini`, `#haskell`, previously `#cfcr`
-
 * Steffen Uhlig
    - IBM
    - `#eirini`, `#ruby`, previously `#bits-service`
+
+* Akshay Mankar
+   - Pivotal
+   - `#eirini`, `#haskell`, previously `#cfcr`
 
 # 30 Seconds to CF?
 
@@ -85,56 +85,56 @@ You are ...
 
 * SCF + fissile
 * Eirini
+* Kubernetes
 * Helm
 * Concourse
 
-# Secret Sauce
+#
 
-![](eirini-arch.png)
+![It's a pipeline!](graph1.svg)
 
-# It's a pipeline!
+#
 
+![Deploy CF](graph2.svg)
 
-![](graph1.svg)
-<!-- ![](pipeline-sketch.jpg) -->
+#
 
-# Deploy CF
+![Test thy cluster](graph3.svg)
 
-![](graph2.svg)
+#
 
-# Test thy cluster
+![No need to see the YAML](graph4.svg)
 
-![](graph3.svg)
-
-# No need to see the YAML
-
-![](graph4.svg)
-
-# Details
-
-
-# Creates k8s cluster
-
-![](pipeline-cluster-management.png)
-
-# Deploys SCF
-
-![](pipeline-deploy-scf.png)
-
-# It's ready!
-
-![](welcome-to-scf.png)
+# UX
 
 # `set-pipeline`
 
 * the only manual step
 * takes the name of "the world"
 
+# It's ready!
+
+![](welcome-to-scf.png)
+
+#
+
+![Secret Sauce](cf-push-eirini.png)
+
 # How to ...
 
-# Help!
+# I need another CF
 
-## I broke my dev env
+* Before:
+  1. Install VirtualBox
+  1. Install `bosh` (lite)
+  1. Deploy
+  1. Wait
+  1. `goto 4`
+
+* Now:
+  - `set-pipeline hello-world`
+
+# I broke my dev env
 
 <div id="left">
 * Before:
