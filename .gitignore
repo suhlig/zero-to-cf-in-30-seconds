@@ -1,3 +1,4 @@
+.envrc
 .rake_tasks
 gpp
 public_html
