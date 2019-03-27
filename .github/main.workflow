@@ -8,12 +8,14 @@ action "push to CF" {
   needs = "generate-presentation"
   env = {
     API_ENDPOINT = "https://api.eu-gb.bluemix.net"
-    CF_USER = "apikey"
     CF_ORG = "Steffen.Uhlig@de.ibm.com"
     CF_SPACE = "dev"
     EXTRA_ARGS = ""
   }
-  secrets = ["CF_PASSWORD"]
+  secrets = [
+    "CF_PASSWORD",
+    "CF_USERNAME",
+  ]
 }
 
 action "generate-presentation" {
