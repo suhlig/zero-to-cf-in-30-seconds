@@ -1,5 +1,6 @@
 require 'rake/clean'
 require 'pathname'
+require 'git-dirty'
 
 SOURCE_DIR = 'src'.freeze
 
@@ -16,15 +17,21 @@ GPP_FILES = FileList["#{GPP_DIR}/index.markdown"]
 CLEAN.include GPP_DIR, DIRTY_FILE
 CLOBBER.include TARGET_DIR
 
+REVEAL_JS = "reveal.js".freeze
 REVEAL_JS_VERSION = '3.7.0'.freeze
-REVEAL_JS_VERSIONED_NAME = "reveal.js-#{REVEAL_JS_VERSION}".freeze
-REVEAL_JS_DIR = TARGET_DIR / REVEAL_JS_VERSIONED_NAME
-REVEAL_JS_BASE = 'https://github.com/hakimel/reveal.js/archive'.freeze
-REVEAL_JS_DOWNLOAD_URL = "#{REVEAL_JS_BASE}/#{REVEAL_JS_VERSION}.tar.gz".freeze
+REVEAL_JS_TARGET_DIR = TARGET_DIR / REVEAL_JS
 
 desc 'reveal.js is present'
-directory REVEAL_JS_DIR => TARGET_DIR do |task|
-  sh "curl --location #{REVEAL_JS_DOWNLOAD_URL} | tar xz -C #{TARGET_DIR}"
+directory REVEAL_JS_TARGET_DIR => TARGET_DIR do |target|
+  mkdir target.name
+
+  if ENV['REVEAL_JS_DIR'].to_s.empty?
+    warn "Downloading reveal.js #{REVEAL_JS_VERSION}. Set REVEAL_JS_DIR in order to use a cached version."
+    sh "curl --location https://github.com/hakimel/reveal.js/archive/#{REVEAL_JS_VERSION}.tar.gz | tar xz -C #{target.name} --strip-components 1"
+  else
+    warn "Using cached version of reveal.js from #{ENV['REVEAL_JS_DIR']}"
+    cp_r FileList["#{ENV['REVEAL_JS_DIR']}/."], target.name, remove_destination: true
+  end
 end
 
 RESIZABLE_ASSETS = (FileList["assets/*.png"] + FileList["assets/*.jpg"])
@@ -52,11 +59,10 @@ file "#{GPP_DIR}/index.markdown" => [GPP_DIR, DIRTY_FILE] + FileList["#{SOURCE_D
   sh %(gpp -I src -x -o #{target} #{SOURCE_DIR}/index.markdown)
 end
 
-require 'git-dirty'
 git_dirty_file DIRTY_FILE
 
 desc "Build #{TARGET_FILE}"
-file TARGET_FILE => [ TARGET_DIR, REVEAL_JS_DIR, GPP_FILES, DIRTY_FILE ] + ASSETS + RESIZED_ASSETS do
+file TARGET_FILE => [ TARGET_DIR, REVEAL_JS_TARGET_DIR, GPP_FILES, DIRTY_FILE ] + ASSETS + RESIZED_ASSETS do
   sh %(pandoc
       --to=revealjs
       --standalone
@@ -66,7 +72,7 @@ file TARGET_FILE => [ TARGET_DIR, REVEAL_JS_DIR, GPP_FILES, DIRTY_FILE ] + ASSET
       --variable theme=white
       --variable slideNumber=true
       --variable history=true
-      --variable revealjs-url=#{REVEAL_JS_VERSIONED_NAME}
+      --variable revealjs-url=#{REVEAL_JS}
       --include-in-header=#{TARGET_DIR}/customizations.css
     #{GPP_FILES}
   ).split("\n").join(' ')
