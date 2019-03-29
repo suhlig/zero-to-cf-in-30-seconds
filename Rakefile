@@ -12,14 +12,8 @@ GPP_DIR = Pathname('gpp')
 directory GPP_DIR
 DIRTY_FILE = GPP_DIR / '.dirty'
 GPP_FILES = FileList["#{GPP_DIR}/index.markdown"]
-CLEAN.include GPP_DIR
 
-CLEAN.include FileList[
-  "#{TARGET_DIR}/*.html",
-  "#{TARGET_DIR}/*.svg",
-  DIRTY_FILE,
-]
-
+CLEAN.include GPP_DIR, DIRTY_FILE
 CLOBBER.include TARGET_DIR
 
 REVEAL_JS_VERSION = '3.7.0'.freeze
