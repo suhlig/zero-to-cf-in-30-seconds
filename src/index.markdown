@@ -177,6 +177,12 @@ Did we achieve our goals? ...
 
 `http://zero2cfin30s.eirini.cf`
 
+# Eirini Sessions
+
+#include eirini-sessions.markdown
+
+# Meta
+
 <div class="mini">
   Rev.
   #include ../gpp/.dirty
