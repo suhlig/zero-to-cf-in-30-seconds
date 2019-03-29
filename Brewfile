@@ -1,3 +1,5 @@
-brew 'pandoc'
-brew 'gpp'
-brew 'ruby'
+brew "ruby"
+brew "gpp"
+brew "graphicsmagick"
+brew "ditaa"
+brew "pandoc"

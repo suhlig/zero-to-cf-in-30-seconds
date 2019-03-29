@@ -33,8 +33,18 @@ directory REVEAL_JS_DIR => TARGET_DIR do |task|
   sh "curl --location #{REVEAL_JS_DOWNLOAD_URL} | tar xz -C #{TARGET_DIR}"
 end
 
-ASSET_SOURCES = FileList['assets/*']
-ASSETS = ASSET_SOURCES.pathmap("#{TARGET_DIR}/%f")
+RESIZABLE_ASSETS = (FileList["assets/*.png"] + FileList["assets/*.jpg"])
+RESIZED_ASSETS = RESIZABLE_ASSETS.pathmap("#{TARGET_DIR}/%f")
+
+RESIZED_ASSETS.zip(RESIZABLE_ASSETS).each do |target, source|
+  desc "Resize #{source} to #{target}"
+  file target => source do
+    sh "gm convert #{source} -geometry '1920x1080>' #{target}"
+  end
+end
+
+ASSET_SOURCES = FileList['assets/*'] - RESIZABLE_ASSETS
+ASSETS = ASSET_SOURCES.pathmap("#{TARGET_DIR}/%f") - RESIZED_ASSETS
 
 ASSETS.zip(ASSET_SOURCES).each do |target, source|
   desc "Copy #{source} to #{target}"
@@ -52,7 +62,7 @@ require 'git-dirty'
 git_dirty_file DIRTY_FILE
 
 desc "Build #{TARGET_FILE}"
-file TARGET_FILE => [ TARGET_DIR, REVEAL_JS_DIR, GPP_FILES, DIRTY_FILE ] + ASSETS do
+file TARGET_FILE => [ TARGET_DIR, REVEAL_JS_DIR, GPP_FILES, DIRTY_FILE ] + ASSETS + RESIZED_ASSETS do
   sh %(pandoc
       --to=revealjs
       --standalone
