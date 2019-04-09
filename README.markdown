@@ -77,3 +77,9 @@ Movie: In a terminal, someone types
 # TODO
 * master gets cf-pushed to a staging space
 * releases gets cf-pushed to the production space
+
+# Feedback
+* Took around 20 minutes in total
+* We should provide more details about what _exactly_ happens in our pipeline (not just "there is a magic pipeline").
+* Some in the audience did not know much about SCF and Eirini yet, maybe we can add some details about those upfront
+* Mention more prominently that this is `ibmcloud`-only so far
