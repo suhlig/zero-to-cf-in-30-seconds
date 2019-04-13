@@ -3,10 +3,12 @@ GEM
   specs:
     git-dirty (1.0.1)
     rake (12.3.2)
-    revealing (1.0.0)
+    revealing (1.0.1)
       bundler
       git-dirty
       rake
+      thor
+    thor (0.20.3)
 
 PLATFORMS
   ruby
