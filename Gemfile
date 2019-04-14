@@ -1,4 +1,4 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-gem "rake"
-gem "revealing"
+gem 'rake'
+gem 'revealing', '>= 1.0.2'
