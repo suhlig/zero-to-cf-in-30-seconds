@@ -3,7 +3,7 @@ GEM
   specs:
     git-dirty (1.0.1)
     rake (12.3.2)
-    revealing (1.0.2)
+    revealing (1.0.4)
       bundler
       git-dirty
       rake
