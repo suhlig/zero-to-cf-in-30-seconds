@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 
 gem 'rake'
-gem 'revealing', '>= 1.0.2'
+gem 'revealing', '>= 1.8.0'
