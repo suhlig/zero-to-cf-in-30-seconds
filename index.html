@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en_US">
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Akshay Mankar, Steffen Uhlig">
+  <meta name="keywords" content="presentation, reveal.js, ruby, markdown, pandoc, revealing">
+  <title>Zero to CF in  30 Seconds</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="reveal.js/dist/reset.css">
+  <link rel="stylesheet" href="reveal.js/dist/reveal.css">
+  <style>
+    .reveal .sourceCode {  /* see #7635 */
+      overflow: visible;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="reveal.js/dist/theme/white.css" id="theme">
+  <style type="text/css">
+    .reveal .mini { font-size: 50%; }
+    .reveal .url { text-transform: lowercase; }
+
+    .reveal section img {
+      background: none;
+      border: none;
+      box-shadow: none;
+    }
+
+    .reveal iframe {
+      width: 100%;
+      width: -moz-available;
+      width: -webkit-fill-available;
+      width: fill-available;
+      height: 100%;
+      height: -moz-available;
+      height: -webkit-fill-available;
+      height: fill-available;
+    }
+
+    .reveal #left {
+      left:-8.33%;
+      text-align: left;
+      float: left;
+      width:50%;
+      z-index:-10;
+    }
+
+    .reveal #right {
+      left:31.25%;
+      top: 75px;
+      float: right;
+      text-align: right;
+      z-index:-10;
+      width:50%;
+    }
+  </style>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Register.StartupHook("End Jax",function () {
+      return MathJax.Hub.setRenderer("SVG");
+    });
+  </script>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Zero to CF in <br/>30 Seconds</h1>
+  <p class="author">Akshay Mankar, Steffen Uhlig</p>
+</section>
+
+<section id="who-we-are" class="slide level1">
+<h1>Who we are</h1>
+<ul>
+<li>Steffen Uhlig
+<ul>
+<li>IBM</li>
+<li><code>#eirini</code>, <code>#ruby</code>, previously
+<code>#bits-service</code></li>
+</ul></li>
+<li>Akshay Mankar
+<ul>
+<li>Pivotal</li>
+<li><code>#eirini</code>, <code>#haskell</code>, previously
+<code>#cfcr</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="seconds-to-cf" class="slide level1">
+<h1>30 Seconds to CF?</h1>
+<ul>
+<li class="fragment">We cheated a bit</li>
+<li class="fragment">30 seconds is for typing
+<code>set-pipeline</code></li>
+<li class="fragment">It’s more like <strong>15 minutes</strong></li>
+</ul>
+<div class="fragment">
+<p>Sorry 🤠</p>
+</div>
+</section>
+<section id="this-is-for-you-if" class="slide level1">
+<h1>This is for you if:</h1>
+<p>You are …</p>
+<ul>
+<li>test-driving CF (different versions maybe?)</li>
+<li>building on top of CF (e.g. a tool)</li>
+<li>developing a CF component</li>
+</ul>
+</section>
+<section id="big-idea" class="slide level1">
+<h1>Big Idea</h1>
+<p><code>minikube : kube :: this : CF</code></p>
+</section>
+<section id="demo" class="slide level1">
+<h1>Demo</h1>
+<video class="stretch" src="https://github.com/suhlig/zero-to-cf-in-30-seconds/releases/download/v1.0.0-beta.1/zero2cfin30s.mp4" controls />
+<aside class="notes">
+<ul>
+<li><p>Create the world</p>
+<pre class="command"><code>./set-pipeline zero2cfin30s eirini ~/workspace/eirini/private-config</code></pre></li>
+<li><p>In browser, show pipeline:
+https://ci.flintstone.cf.cloud.ibm.com/teams/eirini/pipelines/zero2cfin30s</p></li>
+<li><p>Trigger delete job:</p>
+<pre class="command"><code>fly -t eirini trigger-job --job zero2cfin30s/delete-cluster --watch</code></pre></li>
+<li><p>In terminal, show CF containers coming up in <code>scf</code>
+namespace:</p>
+<pre class="command"><code>ibmcloud ks cluster-get zero2cfin30s
+eval $(ibmcloud ks cluster-config --cluster zero2cfin30s --export)
+watch kubectl get pods -n scf</code></pre></li>
+<li><p>TODO Maybe show app containers coming up in <code>opi</code>
+namespace (classic HerrJulz demo)</p></li>
+</ul>
+</aside>
+</section>
+<section id="why" class="slide level1">
+<h1>Why?</h1>
+</section>
+<section id="dev-speed" class="slide level1">
+<h1>Dev speed</h1>
+<ul>
+<li>Quickly spin up a dev environment</li>
+<li>Fast onboarding of new team members</li>
+<li>Less fear<br/> =&gt; broke it? N.P.!</li>
+</ul>
+</section>
+<section id="its-lightweight" class="slide level1">
+<h1>It’s lightweight</h1>
+<ul>
+<li>Keep your laptop clean
+<ul>
+<li>no need to run CF locally</li>
+<li>your version / patch level on someone else’s hardware</li>
+</ul></li>
+<li>Cookie-cutter approach
+<ul>
+<li>Test environments by the dozen</li>
+<li>Pets vs. cattle</li>
+</ul></li>
+</ul>
+</section>
+<section id="repeatable" class="slide level1">
+<h1>Repeatable</h1>
+<ul>
+<li>Yields repeatable dev environments</li>
+<li>Ship the config, not the cluster
+<ul>
+<li>Vagrant philosophy</li>
+</ul></li>
+</ul>
+</section>
+<section id="how-does-it-work" class="slide level1">
+<h1>How does it work?</h1>
+<ul>
+<li>SCF + fissile</li>
+<li>Eirini</li>
+<li>Kubernetes</li>
+<li>Helm</li>
+<li>Concourse</li>
+</ul>
+</section>
+<section id="section" class="slide level1">
+<h1></h1>
+<figure>
+<img data-src="graph1.svg" alt="It’s a pipeline!" />
+<figcaption aria-hidden="true">It’s a pipeline!</figcaption>
+</figure>
+</section>
+<section id="section-1" class="slide level1">
+<h1></h1>
+<figure>
+<img data-src="graph2.svg" alt="Deploy CF" />
+<figcaption aria-hidden="true">Deploy CF</figcaption>
+</figure>
+</section>
+<section id="section-2" class="slide level1">
+<h1></h1>
+<figure>
+<img data-src="graph3.svg" alt="Test thy cluster" />
+<figcaption aria-hidden="true">Test thy cluster</figcaption>
+</figure>
+</section>
+<section id="section-3" class="slide level1">
+<h1></h1>
+<figure>
+<img data-src="graph4.svg" alt="No need to see the YAML" />
+<figcaption aria-hidden="true">No need to see the YAML</figcaption>
+</figure>
+</section>
+<section id="ux" class="slide level1">
+<h1>UX</h1>
+</section>
+<section id="set-pipeline" class="slide level1">
+<h1><code>set-pipeline</code></h1>
+<ul>
+<li>the only manual step</li>
+<li>takes the name of “the world”</li>
+</ul>
+</section>
+<section id="its-ready" class="slide level1">
+<h1>It’s ready!</h1>
+<p><img data-src="welcome-to-scf.png" /></p>
+</section>
+<section id="section-4" class="slide level1">
+<h1></h1>
+<figure>
+<img data-src="cf-push-eirini.png" alt="Secret Sauce" />
+<figcaption aria-hidden="true">Secret Sauce</figcaption>
+</figure>
+</section>
+<section id="how-to" class="slide level1">
+<h1>How to …</h1>
+</section>
+<section id="i-need-another-cf" class="slide level1">
+<h1>I need another CF</h1>
+<ul>
+<li>Before:
+<ol type="1">
+<li>Install VirtualBox</li>
+<li>Install <code>bosh</code> (lite)</li>
+<li>Deploy</li>
+<li>Wait</li>
+<li><code>goto 4</code></li>
+</ol></li>
+<li>Now:
+<ul>
+<li><code>set-pipeline hello-world</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="i-broke-my-dev-env" class="slide level1">
+<h1>I broke my dev env</h1>
+<div id="left">
+<ul>
+<li>Before:
+<ul>
+<li>Debug</li>
+<li>Troubleshoot</li>
+<li>Give up</li>
+<li>Find the docs how to re-create</li>
+</ul></li>
+</ul>
+</div>
+<div id="right">
+<ul>
+<li>Now:
+<ul>
+<li>Press the recreate button in Concourse</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="ideas" class="slide level1">
+<h1>Ideas</h1>
+<ul>
+<li>Notification?</li>
+<li>Print details at the end of set-pipeline?</li>
+<li>Your ideas?</li>
+</ul>
+</section>
+<section id="similar-projects" class="slide level1">
+<h1>Similar Projects</h1>
+<ul>
+<li><a
+href="https://github.com/petergtz/1-click-bosh-lite-pipeline">1-click
+BOSH lite pipeline</a></li>
+<li><a
+href="https://github.com/cloudfoundry/bosh-bootloader">bosh-bootloader</a></li>
+</ul>
+</section>
+<section id="score-card" class="slide level1">
+<h1>Score Card</h1>
+<p>Did we achieve our goals? …</p>
+<ol type="1">
+<li>Getting a new env is very straighforward: ✅</li>
+<li>Repeatability: ✅</li>
+<li>Speed == 30s: ❌</li>
+<li>Speed &lt;= 30mins: ✅</li>
+</ol>
+</section>
+<section id="thanks" class="slide level1">
+<h1>Thanks!</h1>
+<p><code>@AkshayMankar</code></p>
+<p><code>@suhlig</code></p>
+<p><code>http://zero2cfin30s.eirini.cf</code></p>
+</section>
+<section id="eirini-sessions" class="slide level1">
+<h1>Eirini Sessions</h1>
+<table style="font-size: 60%;">
+<col width="45%">
+<col width="55%" style="border-left: double;">
+<tr>
+<th>
+Wednesday, April 3
+</th>
+<th>
+Thursday, April 4
+</th>
+</tr>
+<tr>
+<td>
+<a href="https://sched.co/LVPH">Project Office Hours: Eirini</a><br/>
+Julian Friedman and the Eirineers 🎶<br/> 3:35pm - 4:05pm
+</td>
+<td>
+<a href="https://sched.co/KJDa">“Kube” your Enthusiasm: Bringing CF and
+K8s Together with Project Eirini</a><br/> Julz Friedman &amp; Mario
+Nitchev<br/> 11:05am - 11:35am
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://sched.co/KJCK">Cloud Foundry 101 for Kubernetes
+Users</a><br/> Steffen Uhlig &amp; Oleksandr Slynko<br/> 5:15pm - 5:45pm
+</td>
+<td>
+<a href="https://sched.co/LViH">Diego vs Eirini: How to Choose the Best
+Fitting Container Scheduler</a><br/> Julian Skupnjak &amp; Georgi
+Dankov<br/> 2:00pm - 2:30pm
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://sched.co/KJCr">“Microservices With Cloud Foundry and
+Kubernetes”</a><br/> Julian Skupnjuak &amp; Georgi Dankov<br/> 5:15pm -
+5:45pm
+</td>
+<td>
+<a href="https://sched.co/LVYz">Zero to CF in Kube-Cluster in 30 Seconds
+with Concourse, Helm, Fissile and Eirini</a><br/> Steffen Uhlig &amp;
+Akshay Mankar<br/> 3:40pm - 4:10pm
+</td>
+</tr>
+</table>
+</section>
+<section id="meta" class="slide level1">
+<h1>Meta</h1>
+<div class="mini">
+Rev. e984b48* <br/> built on 2023-11-11 15:48:39 UTC
+</div>
+</section>
+    </div>
+  </div>
+
+  <script src="reveal.js/dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="reveal.js/plugin/notes/notes.js"></script>
+  <script src="reveal.js/plugin/search/search.js"></script>
+  <script src="reveal.js/plugin/zoom/zoom.js"></script>
+  <script src="reveal.js/plugin/math/math.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: true,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'bottom-right',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: true,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: true,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'default',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: true,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'slide',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>
